@@ -10,8 +10,8 @@
 					var lines = contents.split("\n");
 					var formattedContent = "";
 					console.log(lines);
-					for (var line in lines) {
-						console.log(line);
+					for (var index in lines) {
+						console.log(lines[index]);
 					}
 					console.log(contents);
 					$("#formattedContents").html(contents);	
@@ -64,9 +64,9 @@
 			<button type="button" id="viewBtn">View</button>
 			</div>
 			<div class="row">
-				<code id="formattedContents">
+				<div id="formattedContents" class="container">
 					Formatted contents here.
-				</code>
+				</div>
 			</div>
 		</div>
 	</body>
