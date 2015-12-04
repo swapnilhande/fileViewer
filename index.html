@@ -9,12 +9,11 @@
 					var contents = $("#fileContents").val();
 					var lines = contents.split("\n");
 					var formattedContent = "";
-					console.log(lines);
 					for (var index in lines) {
-						console.log(lines[index]);
+						var line = lines[index];
+						formattedContent = formattedContent + line + "\n";
 					}
-					console.log(contents);
-					$("#formattedContents").html(contents);	
+					$("#formattedContents").html(formattedContent);	
 				});
 			});
 		</script>
