@@ -7,17 +7,17 @@
 			$(document).ready(function() {
 				$("#viewBtn").click(function() {
 					var contents = $("#fileContents").val();
-					var isRecordCode = $("#recordCode").prod("checked");
-					var isFileHeader = $("#fileHeader").prod("checked");
-					var isFileTrailer = $("#fileTrailer").prod("checked");
-					var isCreditSummary = $("#creditSummary").prod("checked");
-					var isDebitSummary = $("#debitSummary").prod("checked");
-					var isProcessingDate = $("#processingDate").prod("checked");
-					var isChainCode = $("#chainCode").prod("checked");
-					var isAmount = $("#amount").prod("checked");
-					var isFundingSubmerchantId = $("#fundingSubmerhantId").prod("checked");
-					var isRecordLevel = $("#recordLevel").prod("checked");
-					var isMop = $("#mop").prod("checked");
+					var isRecordCode = $("#recordCode").prop("checked");
+					var isFileHeader = $("#fileHeader").prop("checked");
+					var isFileTrailer = $("#fileTrailer").prop("checked");
+					var isCreditSummary = $("#creditSummary").prop("checked");
+					var isDebitSummary = $("#debitSummary").prop("checked");
+					var isProcessingDate = $("#processingDate").prop("checked");
+					var isChainCode = $("#chainCode").prop("checked");
+					var isAmount = $("#amount").prop("checked");
+					var isFundingSubmerchantId = $("#fundingSubmerhantId").prop("checked");
+					var isRecordLevel = $("#recordLevel").prop("checked");
+					var isMop = $("#mop").prop("checked");
 					var lines = contents.split("\n");
 					var formattedContent = "";
 					for (var index in lines) {
