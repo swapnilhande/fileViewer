@@ -5,18 +5,17 @@
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 		<script>
 			$(document).ready(function() {
-				$("#viewBtn").click($("#formattedContents").html('<code>'+$("#fileContents").val()+'</code>'));	
+				$("#viewBtn").click($("#formattedContents").html($("#fileContents").val()));	
 			});
 		</script>
 	</head>
 	<body>
 		<div class="container">
 			<div class="container">
-			<textarea id="fileContents" rows="4" cols="50" placeholder="Enter eMAF file contents here."></textarea>
+			<textarea id="fileContents" rows="4" cols="50" placeholder="Enter file contents here."></textarea>
 			<button type="button" id="viewBtn">View</button>
 			</div>
 			<div id="formattedContents">
-			
 			</div>
 		</div>
 	</body>
