@@ -6,7 +6,9 @@
 		<script>
 			$(document).ready(function() {
 				$("#viewBtn").click(function() {
-					$("#formattedContents").html($("#fileContents").val()));	
+					var contents = $("#fileContents").val();
+					console.log(contents);
+					$("#formattedContents").html(contents);	
 				}
 			});
 		</script>
