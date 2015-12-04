@@ -56,7 +56,7 @@
 							if (isFileHeader) {
 								recordLine = "<strong>" + recordLine + "<strong>";
 							}
-							formattedContent = recordLine + "<br />";
+							formattedContent = formattedContent + recordLine + "<br />";
 						} else if (record == "910") {
 							if (isRecordCode) {
 								recordLine = recordLine 
@@ -69,7 +69,7 @@
 							if (isFileTrailer) {
 								recordLine = "<strong>" + recordLine + "<strong>";
 							}
-							formattedContent = recordLine + "<br />";
+							formattedContent = formattedContent + recordLine + "<br />";
 						} else if (record == "503") {
 							if (isRecordCode) {
 								recordLine = recordLine 
@@ -118,7 +118,7 @@
 							if (isCreditSummary) {
 								recordLine = "<strong>" + recordLine + "<strong>";
 							}
-							formattedContent = recordLine + "<br />";
+							formattedContent = formattedContent + recordLine + "<br />";
 						} else if (record == "522") {
 							if (isRecordCode) {
 								recordLine = recordLine 
@@ -167,7 +167,7 @@
 							if (isDebitSummary) {
 								recordLine = "<strong>" + recordLine + "<strong>";
 							}
-							formattedContent = recordLine + "<br />";
+							formattedContent = formattedContent + recordLine + "<br />";
 						} else {
 							formattedContent = formattedContent + line + "<br />";
 						}
