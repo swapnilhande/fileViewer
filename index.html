@@ -65,7 +65,9 @@
 								+ record
 								+ "</strong>"
 								+ line.substring(12);
-							} 
+							} else {
+								recordLine = line;
+							}
 							if (isFileTrailer) {
 								recordLine = "<strong>" + recordLine + "</strong>";
 							}
