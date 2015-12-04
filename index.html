@@ -7,26 +7,163 @@
 			$(document).ready(function() {
 				$("#viewBtn").click(function() {
 					var contents = $("#fileContents").val();
+					var isRecordCode = $("#recordCode").prod("checked");
+					var isFileHeader = $("#fileHeader").prod("checked");
+					var isFileTrailer = $("#fileTrailer").prod("checked");
+					var isCreditSummary = $("#creditSummary").prod("checked");
+					var isDebitSummary = $("#debitSummary").prod("checked");
+					var isProcessingDate = $("#processingDate").prod("checked");
+					var isChainCode = $("#chainCode").prod("checked");
+					var isAmount = $("#amount").prod("checked");
+					var isFundingSubmerchantId = $("#fundingSubmerhantId").prod("checked");
+					var isRecordLevel = $("#recordLevel").prod("checked");
+					var isMop = $("#mop").prod("checked");
 					var lines = contents.split("\n");
 					var formattedContent = "";
 					for (var index in lines) {
 						var line = lines[index];
+						var recordLine = line;
 						var record = line.substring(9, 12);
 						if (record == "010") {
-							var processingDate = line.substring(42,50);
-							var chainCode = line.substring(105,111);
+							if (isRecordCode) {
+								recordLine = line.substring(0, 9)
+								+ "<strong>"
+								+ record
+								+ "</strong>"
+								+ line.substring(12, 42);
+							} else {
+								recordLine = recordLine + line.substring(0,42);
+							}
+							if (isProcessingDate) {
+								recordLine = recordLine 
+								+ "<strong>"
+								+ line.substring(42,50)
+								+ "</strong>"
+								+ line.substring(50,105);
+							} else {
+								recordLine = recordLine + line.substring(42,105);
+							}
+							if (isChainCode) {
+								recordLine = recordLine 
+								+ "<strong>" 
+								+ line.substring(105,111)
+								+ "</strong>"
+								+ line.substring (111);
+							} else {
+								recordLine = recordLine + line.substring(105);
+							}
+							if (isFileHeader) {
+								recordLine = "<strong>" + recordLine + "<strong>";
+							}
+							formattedContent = recordLine + "<br />";
 						} else if (record == "910") {
-							
+							if (isRecordCode) {
+								recordLine = line.substring(0, 9)
+								+ "<strong>"
+								+ record
+								+ "</strong>"
+								+ line.substring(12);
+							} 
+							if (isFileTrailer) {
+								recordLine = "<strong>" + recordLine + "<strong>";
+							}
+							formattedContent = recordLine + "<br />";
 						} else if (record == "503") {
-							var amount = line.substring(48,61);
-							var recordLevel = line.substring(15,15);
-							var fundingSubmerchantId = line.substring(28,44);
-							var mop = line.substring(44,48);
+							if (isRecordCode) {
+								recordLine = line.substring(0, 9)
+								+ "<strong>"
+								+ record
+								+ "</strong>"
+								+ line.substring(12, 15);
+							} else {
+								recordLine = recordLine + line.substring(0,15);
+							}
+							if (isRecordLevel) {
+								recordLine = recordLine 
+								+ "<strong>"
+								+ line.substring(15,15)
+								+ "</strong>"
+								+ line.substring(15,28);
+							} else {
+								recordLine = recordLine + line.substring(15,28);
+							}
+							if (isFundingSubmerchantId) {
+								recordLine = recordLine 
+								+ "<strong>"
+								+ line.substring(28,44)
+								+ "</strong>"
+							} else {
+								recordLine = recordLine + line.substring(28,44);
+							}
+							if (isMop) {
+								recordLine = recordLine 
+								+ "<strong>"
+								+ line.substring(44,48)
+								+ "</strong>"
+							} else {
+								recordLine = recordLine + line.substring(44,48);
+							}
+							if (isAmount) {
+								recordLine = recordLine 
+								+ "<strong>"
+								+ line.substring(48,61)
+								+ "</strong>"
+								+ line.substring(61);
+							} else {
+								recordLine = recordLine + line.substring(48);
+							}
+							if (isCreditSummary) {
+								recordLine = "<strong>" + recordLine + "<strong>";
+							}
+							formattedContent = recordLine + "<br />";
 						} else if (record == "522") {
-							var amount = line.substring(97,110);
-							var recordLevel = line.substring(15,15);
-							var fundingSubmerchantId = line.substring(28,44);
-							var mop = line.substring(44,48);
+							if (isRecordCode) {
+								recordLine = line.substring(0, 9)
+								+ "<strong>"
+								+ record
+								+ "</strong>"
+								+ line.substring(12, 15);
+							} else {
+								recordLine = recordLine + line.substring(0,15);
+							}
+							if (isRecordLevel) {
+								recordLine = recordLine 
+								+ "<strong>"
+								+ line.substring(15,15)
+								+ "</strong>"
+								+ line.substring(15,28);
+							} else {
+								recordLine = recordLine + line.substring(15,28);
+							}
+							if (isFundingSubmerchantId) {
+								recordLine = recordLine 
+								+ "<strong>"
+								+ line.substring(28,44)
+								+ "</strong>"
+							} else {
+								recordLine = recordLine + line.substring(28,44);
+							}
+							if (isMop) {
+								recordLine = recordLine 
+								+ "<strong>"
+								+ line.substring(44,48)
+								+ "</strong>"
+							} else {
+								recordLine = recordLine + line.substring(44,48);
+							}
+							if (isAmount) {
+								recordLine = recordLine 
+								+ "<strong>"
+								+ line.substring(97,110)
+								+ "</strong>"
+								+ line.substring(110);
+							} else {
+								recordLine = recordLine + line.substring(48);
+							}
+							if (isDebitSummary) {
+								recordLine = "<strong>" + recordLine + "<strong>";
+							}
+							formattedContent = recordLine + "<br />";
 						} else {
 							formattedContent = formattedContent + line + "<br />";
 						}
