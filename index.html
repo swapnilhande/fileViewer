@@ -54,7 +54,7 @@
 								recordLine = recordLine + line.substring(105);
 							}
 							if (isFileHeader) {
-								recordLine = "<strong>" + recordLine + "<strong>";
+								recordLine = "<strong>" + recordLine + "</strong>";
 							}
 							formattedContent = formattedContent + recordLine + "<br />";
 						} else if (record == "910") {
@@ -67,7 +67,7 @@
 								+ line.substring(12);
 							} 
 							if (isFileTrailer) {
-								recordLine = "<strong>" + recordLine + "<strong>";
+								recordLine = "<strong>" + recordLine + "</strong>";
 							}
 							formattedContent = formattedContent + recordLine + "<br />";
 						} else if (record == "503") {
@@ -116,7 +116,7 @@
 								recordLine = recordLine + line.substring(48);
 							}
 							if (isCreditSummary) {
-								recordLine = "<strong>" + recordLine + "<strong>";
+								recordLine = "<strong>" + recordLine + "</strong>";
 							}
 							formattedContent = formattedContent + recordLine + "<br />";
 						} else if (record == "522") {
@@ -165,7 +165,7 @@
 								recordLine = recordLine + line.substring(48);
 							}
 							if (isDebitSummary) {
-								recordLine = "<strong>" + recordLine + "<strong>";
+								recordLine = "<strong>" + recordLine + "</strong>";
 							}
 							formattedContent = formattedContent + recordLine + "<br />";
 						} else {
