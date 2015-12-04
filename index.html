@@ -26,7 +26,8 @@
 						var record = line.substring(9, 12);
 						if (record == "010") {
 							if (isRecordCode) {
-								recordLine = line.substring(0, 9)
+								recordLine = recordLine 
+								+ line.substring(0, 9)
 								+ "<strong>"
 								+ record
 								+ "</strong>"
@@ -71,7 +72,8 @@
 							formattedContent = recordLine + "<br />";
 						} else if (record == "503") {
 							if (isRecordCode) {
-								recordLine = line.substring(0, 9)
+								recordLine = recordLine 
+								+ line.substring(0, 9)
 								+ "<strong>"
 								+ record
 								+ "</strong>"
@@ -119,7 +121,8 @@
 							formattedContent = recordLine + "<br />";
 						} else if (record == "522") {
 							if (isRecordCode) {
-								recordLine = line.substring(0, 9)
+								recordLine = recordLine 
+								+ line.substring(0, 9)
 								+ "<strong>"
 								+ record
 								+ "</strong>"
