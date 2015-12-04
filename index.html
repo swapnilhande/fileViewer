@@ -5,7 +5,7 @@
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 		<script>
 			$(document).ready(function() {
-				$("#viewBtn").click($("#formattedContents").html($("#fileContents").val()));	
+				$("#viewBtn").click($("#formattedContents").html('<code>'+$("#fileContents").val()+'</code>'));	
 			});
 		</script>
 	</head>
@@ -15,8 +15,8 @@
 			<textarea id="fileContents" rows="4" cols="50" placeholder="Enter eMAF file contents here."></textarea>
 			<button type="button" id="viewBtn">View</button>
 			</div>
-			<div class="container">
-				<code id="formattedContents">
+			<div class="container"  id="formattedContents">
+				<code>
 					See formatted results here.
 				</code>
 			</div>
