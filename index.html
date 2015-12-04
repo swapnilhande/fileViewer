@@ -11,7 +11,25 @@
 					var formattedContent = "";
 					for (var index in lines) {
 						var line = lines[index];
-						formattedContent = formattedContent + line + "\n";
+						var record = line.substring(9, 12);
+						if (record == "010") {
+							var processingDate = line.substring(42,50);
+							var chainCode = line.substring(105,111);
+						} else if (record == "910") {
+							
+						} else if (record == "503") {
+							var amount = line.substring(48,61);
+							var recordLevel = line.substring(15,15);
+							var fundingSubmerchantId = line.substring(28,44);
+							var mop = line.substring(44,48);
+						} else if (record == "522") {
+							var amount = line.substring(97,110);
+							var recordLevel = line.substring(15,15);
+							var fundingSubmerchantId = line.substring(28,44);
+							var mop = line.substring(44,48);
+						} else {
+							formattedContent = formattedContent + line + "<br />";
+						}
 					}
 					$("#formattedContents").html(formattedContent);	
 				});
