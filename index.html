@@ -1,9 +1,10 @@
 <html>
 	<head>
+		<script src="//code.jquery.com/jquery-2.1.4.min.js" />
 		<script>
 			function viewClick() {
-				var fileContents = document.getElementById("fileContents").value;
-				document.getElementById("formattedContents").innerHTML = fileContents;
+				var fileContents = $("#fileContents").val();
+				$("#formattedContents").html(fileContents);
 			}
 		</script>
 	</head>
