@@ -58,7 +58,8 @@
 							formattedContent = recordLine + "<br />";
 						} else if (record == "910") {
 							if (isRecordCode) {
-								recordLine = line.substring(0, 9)
+								recordLine = recordLine 
+								+ line.substring(0, 9)
 								+ "<strong>"
 								+ record
 								+ "</strong>"
