@@ -1,0 +1,16 @@
+<html>
+	<head>
+		<script>
+			function viewClick() {
+				var fileContents = document.getElementById("fileContents").value;
+				document.getElementById("formattedContents").innerHTML = fileContents;
+			}
+		</script>
+	</head>
+	<body>
+		<textarea id="fileContents" rows="4" cols="50" placeholder="Enter eMAF file contents here."></textarea>
+		<button type="button" id="viewBtn" onclick="viewClick();">View</button>
+		<div id="formattedContents">
+		</div>
+	</body>
+</html>
