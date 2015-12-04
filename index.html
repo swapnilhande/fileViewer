@@ -7,6 +7,12 @@
 			$(document).ready(function() {
 				$("#viewBtn").click(function() {
 					var contents = $("#fileContents").val();
+					var lines = contents.split("\n");
+					var formattedContent = "";
+					console.log(lines);
+					lines.foreach( function(line) {
+						console.log(line);
+					})
 					console.log(contents);
 					$("#formattedContents").html(contents);	
 				});
