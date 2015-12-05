@@ -181,7 +181,7 @@
 	</head>
 	<body>
 		<div class="container">
-			<h4>File Viewer</h4>
+			<h2 class="row">File Viewer</h2>
 			<div class="row">
 			<textarea id="fileContents" rows="4" cols="50" placeholder="Enter file contents here." class="container"></textarea>
 			</div>
@@ -203,9 +203,12 @@
 			  	</div>
 				<button type="button" id="viewBtn">View</button>
 			</div>
-			<div class="row">
-				<div id="formattedContents" class="container">
-					Formatted contents here.
+			<div class="row panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">Formatted file contents</h3>
+			  	</div>
+				<div class="panel-body" id="formattedContents">
+				    
 				</div>
 			</div>
 		</div>
