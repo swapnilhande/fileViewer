@@ -1,238 +1,52 @@
 <html>
-	<head>
-		<script src="//code.jquery.com/jquery-2.1.4.min.js" />
-		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-		<script>
-			$(document).ready(function() {
-				$("#viewBtn").click(function() {
-					var contents = $("#fileContents").val();
-					var isRecordCode = $("#recordCode").prop("checked");
-					var isFileHeader = $("#fileHeader").prop("checked");
-					var isFileTrailer = $("#fileTrailer").prop("checked");
-					var isCreditSummary = $("#creditSummary").prop("checked");
-					var isDebitSummary = $("#debitSummary").prop("checked");
-					var isProcessingDate = $("#processingDate").prop("checked");
-					var isChainCode = $("#chainCode").prop("checked");
-					var isAmount = $("#amount").prop("checked");
-					var isFundingSubmerchantId = $("#fundingSubmerhantId").prop("checked");
-					var isRecordLevel = $("#recordLevel").prop("checked");
-					var isMop = $("#mop").prop("checked");
-					var lines = contents.split("\n");
-					var formattedContent = "";
-					for (var index in lines) {
-						var line = lines[index];
-						var recordLine = "";
-						var record = line.substring(9, 12);
-						if (record == "010") {
-							if (isRecordCode) {
-								recordLine = recordLine 
-								+ line.substring(0, 9)
-								+ "<strong>"
-								+ record
-								+ "</strong>"
-								+ line.substring(12, 42);
-							} else {
-								recordLine = recordLine + line.substring(0,42);
-							}
-							if (isProcessingDate) {
-								recordLine = recordLine 
-								+ "<strong>"
-								+ line.substring(42,50)
-								+ "</strong>"
-								+ line.substring(50,105);
-							} else {
-								recordLine = recordLine + line.substring(42,105);
-							}
-							if (isChainCode) {
-								recordLine = recordLine 
-								+ "<strong>" 
-								+ line.substring(105,111)
-								+ "</strong>"
-								+ line.substring (111);
-							} else {
-								recordLine = recordLine + line.substring(105);
-							}
-							if (isFileHeader) {
-								recordLine = "<strong>" + recordLine + "</strong>";
-							}
-							formattedContent = formattedContent + recordLine + "<br />";
-						} else if (record == "910") {
-							if (isRecordCode) {
-								recordLine = recordLine 
-								+ line.substring(0, 9)
-								+ "<strong>"
-								+ record
-								+ "</strong>"
-								+ line.substring(12);
-							} else {
-								recordLine = line;
-							}
-							if (isFileTrailer) {
-								recordLine = "<strong>" + recordLine + "</strong>";
-							}
-							formattedContent = formattedContent + recordLine + "<br />";
-						} else if (record == "503") {
-							if (isRecordCode) {
-								recordLine = recordLine 
-								+ line.substring(0, 9)
-								+ "<strong>"
-								+ record
-								+ "</strong>"
-								+ line.substring(12, 15);
-							} else {
-								recordLine = recordLine + line.substring(0,15);
-							}
-							if (isRecordLevel) {
-								recordLine = recordLine 
-								+ "<strong>"
-								+ line.substring(15,16)
-								+ "</strong>"
-								+ line.substring(16,28);
-							} else {
-								recordLine = recordLine + line.substring(15,28);
-							}
-							if (isFundingSubmerchantId) {
-								recordLine = recordLine 
-								+ "<strong>"
-								+ line.substring(28,44)
-								+ "</strong>"
-							} else {
-								recordLine = recordLine + line.substring(28,44);
-							}
-							if (isMop) {
-								recordLine = recordLine 
-								+ "<strong>"
-								+ line.substring(44,48)
-								+ "</strong>"
-							} else {
-								recordLine = recordLine + line.substring(44,48);
-							}
-							if (isAmount) {
-								recordLine = recordLine 
-								+ "<strong>"
-								+ line.substring(48,61)
-								+ "</strong>"
-								+ line.substring(61);
-							} else {
-								recordLine = recordLine + line.substring(48);
-							}
-							if (isCreditSummary) {
-								recordLine = "<strong>" + recordLine + "</strong>";
-							}
-							formattedContent = formattedContent + recordLine + "<br />";
-						} else if (record == "522") {
-							if (isRecordCode) {
-								recordLine = recordLine 
-								+ line.substring(0, 9)
-								+ "<strong>"
-								+ record
-								+ "</strong>"
-								+ line.substring(12, 15);
-							} else {
-								recordLine = recordLine + line.substring(0,15);
-							}
-							if (isRecordLevel) {
-								recordLine = recordLine 
-								+ "<strong>"
-								+ line.substring(15,16)
-								+ "</strong>"
-								+ line.substring(16,28);
-							} else {
-								recordLine = recordLine + line.substring(15,28);
-							}
-							if (isFundingSubmerchantId) {
-								recordLine = recordLine 
-								+ "<strong>"
-								+ line.substring(28,44)
-								+ "</strong>"
-							} else {
-								recordLine = recordLine + line.substring(28,44);
-							}
-							if (isMop) {
-								recordLine = recordLine 
-								+ "<strong>"
-								+ line.substring(44,48)
-								+ "</strong>"
-							} else {
-								recordLine = recordLine + line.substring(44,48);
-							}
-							if (isAmount) {
-								recordLine = recordLine 
-								+ "<strong>"
-								+ line.substring(97,110)
-								+ "</strong>"
-								+ line.substring(110);
-							} else {
-								recordLine = recordLine + line.substring(48);
-							}
-							if (isDebitSummary) {
-								recordLine = "<strong>" + recordLine + "</strong>";
-							}
-							formattedContent = formattedContent + recordLine + "<br />";
-						} else {
-							formattedContent = formattedContent + line + "<br />";
-						}
-					}
-					$("#formattedContents").html(formattedContent);	
-				});
-			});
-		</script>
-	</head>
-	<body>
-		<div class="container">
-			<h2 class="row">File Viewer</h2>
-			<div class="row">
-				<ul class="nav nav-tabs">
-				  <li role="presentation" class="active"><a href="#">eMAF</a></li>
-				</ul>
-			</div>
-			<br />
-			<div class="row">
-			<textarea id="fileContents" rows="4" cols="50" 
-				placeholder="Enter file contents here." class="container form-control"></textarea>
-			</div>
-			<div class="row">
-				<div class="checkbox">
-	      				<label><input type="checkbox" id="fileHeader"> File Header</label>
-	      				<label><input type="checkbox" id="fileTrailer"> File Trailer</label>
-					<label><input type="checkbox" id="creditSummary"> Credit Summary</label>
-					<label><input type="checkbox" id="debitSummary"> Debit Summary</label>
-			  	</div>
-			  	<div class="checkbox">
-			  		<label>
-			  			<input type="checkbox" id="recordCode">
-			  			<span class="label label-default"> Record Code</span></label>
-					<label>
-						<input type="checkbox" id="processingDate"> 
-						<span class="label label-primary"> Processing Date</span></label>
-					<label>
-						<input type="checkbox" id="chainCode"> 
-						<span class="label label-success"> Chain Code</span></label>
-					<label>
-						<input type="checkbox" id="amount"> 
-						<span class="label label-info"> Amount</span></label>
-					<label>
-						<input type="checkbox" id="fundingSubmerhantId"> 
-						<span class="label label-warning"> Funding Submerchant ID</span></label>
-					<label>
-						<input type="checkbox" id="recordLevel">
-						<span class="label label-default"> Record Level</span></label>
-					<label>
-						<input type="checkbox" id="mop"> 
-						<span class="label label-danger">Method of Payment</span></label>
-			  	</div>
-				<button type="button" id="viewBtn" class="btn btn-default">View</button>
-			</div>
-			<br />
-			<div class="row panel panel-default">
-				<div class="panel-heading">
-					<h3 class="panel-title">Formatted file contents</h3>
-			  	</div>
-				<div class="panel-body" id="formattedContents">
-				    
-				</div>
-			</div>
-		</div>
-	</body>
+<head>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <h2 class="row">File Viewer</h2>
+    <div class="row">
+        <ul class="nav nav-tabs">
+            <li role="presentation" class="active"><a href="#">eMAF</a></li>
+        </ul>
+    </div>
+    <br />
+    <div class="row">
+			<textarea id="fileContents" rows="4" cols="50"
+                      placeholder="Enter file contents here." class="container form-control"></textarea>
+    </div>
+    <div class="row">
+        <div class="well">
+            <div>
+                <button type="button" id="fileHeader" class="btn btn-default"> File Header</button>
+                <button type="button" id="fileTrailer" class="btn btn-default"> File Trailer</button>
+                <button type="button" id="creditSummary" class="btn btn-default"> Credit Summary</button>
+                <button type="button" id="debitSummary" class="btn btn-default"> Debit Summary</button>
+            </div>
+            <br />
+            <div>
+                <button type="button" id="recordCode" class="btn btn-default">Record Code</button>
+                <button type="button" id="processingDate" class="btn btn-default">Processing Date</button>
+                <button type="button" id="chainCode" class="btn btn-default"> Chain Code</button>
+                <button type="button" id="amount" class="btn btn-default"> Amount</button>
+                <button type="button" id="fundingSubmerhantId" class="btn btn-default"> Funding Submerchant ID</button>
+                <button type="button" id="recordLevel" class="btn btn-default"> Record Level </button>
+                <button type="button" id="mop" class="btn btn-default">Method of Payment</button>
+            </div>
+
+        </div>
+        <div id="selectDeleteAll">
+            <button type="button" id="selectAllBtn" class="btn btn-success">Select All</button>
+            <button type="button" id="clearAllBtn" class="btn btn-danger">Clear All</button>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <pre id="formattedContents"></pre>
+    </div>
+</div>
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+<script src="fileFormatter.js"></script>
+</body>
 </html>
