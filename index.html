@@ -1,204 +1,103 @@
 <html>
 <head>
-    <script src="//code.jquery.com/jquery-2.1.4.min.js" />
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    <script>
-            function formatText() {
-                var contents = $("#fileContents").val();
-                var isRecordCode = $("#recordCode").hasClass("active");
-                var isFileHeader = $("#fileHeader").hasClass("active");
-                var isFileTrailer = $("#fileTrailer").hasClass("active");
-                var isCreditSummary = $("#creditSummary").hasClass("active");
-                var isDebitSummary = $("#debitSummary").hasClass("active");
-                var isProcessingDate = $("#processingDate").hasClass("active");
-                var isChainCode = $("#chainCode").hasClass("active");
-                var isAmount = $("#amount").hasClass("active");
-                var isFundingSubmerchantId = $("#fundingSubmerhantId").hasClass("active");
-                var isRecordLevel = $("#recordLevel").hasClass("active");
-                var isMop = $("#mop").hasClass("active");
-                var lines = contents.split("\n");
-                var formattedContent = "";
-                for (var index in lines) {
-                    var line = lines[index];
-                    var recordLine = "";
-                    var record = line.substring(9, 12);
-                    if (record == "010") {
-                        if (isRecordCode) {
-                            recordLine = recordLine	+ line.substring(0, 9)	+ "<span class='label label-default'>" + record+ "</span>"
-                                         + line.substring(12, 42);
-                        } else {
-                            recordLine = recordLine + line.substring(0,42);
-                        }
-                        if (isProcessingDate) {
-                            recordLine = recordLine + "<span class='label label-primary'>" + line.substring(42,50) + "</span>"
-                                         + line.substring(50,105);
-                        } else {
-                            recordLine = recordLine + line.substring(42,105);
-                        }
-                        if (isChainCode) {
-                            recordLine = recordLine + "<span class='label label-success'>" + line.substring(105,111) + "</span>"
-                                         + line.substring (111);
-                        } else {
-                            recordLine = recordLine + line.substring(105);
-                        }
-                        if (isFileHeader) {
-                            recordLine = "<span class='bg-success'>" + recordLine + "</span>";
-                        }
-                        formattedContent = formattedContent + recordLine + "<br />";
-                    } else if (record == "910") {
-                        if (isRecordCode) {
-                            recordLine = recordLine + line.substring(0, 9) + "<span class='label label-default'>" + record + "</span>"
-                                         + line.substring(12);
-                        } else {
-                            recordLine = line;
-                        }
-                        if (isFileTrailer) {
-                            recordLine = "<span class='bg-danger'>" + recordLine + "</span>";
-                        }
-                        formattedContent = formattedContent + recordLine + "<br />";
-                    } else if (record == "503") {
-                        if (isRecordCode) {
-                            recordLine = recordLine + line.substring(0, 9) + "<span class='label label-default'>" + record + "</span>"
-                                         + line.substring(12, 15);
-                        } else {
-                            recordLine = recordLine + line.substring(0,15);
-                        }
-                        if (isRecordLevel) {
-                            recordLine = recordLine + "<span class='label label-default'>" + line.substring(15,16) + "</span>"
-                                         + line.substring(16,28);
-                        } else {
-                            recordLine = recordLine + line.substring(15,28);
-                        }
-                        if (isFundingSubmerchantId) {
-                            recordLine = recordLine + "<span class='label label-info'>" + line.substring(28,44) + "</span>"
-                        } else {
-                            recordLine = recordLine + line.substring(28,44);
-                        }
-                        if (isMop) {
-                            recordLine = recordLine + "<span class='label label-warning'>" + line.substring(44,48) + "</span>"
-                        } else {
-                            recordLine = recordLine + line.substring(44,48);
-                        }
-                        if (isAmount) {
-                            recordLine = recordLine + "<span class='label label-danger'>" + line.substring(48,61) + "</span>"
-                                         + line.substring(61);
-                        } else {
-                            recordLine = recordLine + line.substring(48);
-                        }
-                        if (isCreditSummary) {
-                            recordLine = "<span class='bg-info'>" + recordLine + "</span>";
-                        }
-                        formattedContent = formattedContent + recordLine + "<br />";
-                    } else if (record == "522") {
-                        if (isRecordCode) {
-                            recordLine = recordLine + line.substring(0, 9) + "<span class='label label-default'>" + record + "</span>"
-                                         + line.substring(12, 15);
-                        } else {
-                            recordLine = recordLine + line.substring(0,15);
-                        }
-                        if (isRecordLevel) {
-                            recordLine = recordLine + "<span class='label label-default'>" + line.substring(15,16) + "</span>"
-                                         + line.substring(16,28);
-                        } else {
-                            recordLine = recordLine + line.substring(15,28);
-                        }
-                        if (isFundingSubmerchantId) {
-                            recordLine = recordLine + "<span class='label label-info'>" + line.substring(28,44) + "</span>"
-                        } else {
-                            recordLine = recordLine + line.substring(28,44);
-                        }
-                        if (isMop) {
-                            recordLine = recordLine + "<span class='label label-warning'>" + line.substring(44,48) + "</span>"
-                        } else {
-                            recordLine = recordLine + line.substring(44,48);
-                        }
-                        if (isAmount) {
-                            recordLine = recordLine + "<span class='label label-danger'>" + line.substring(97,110) + "</span>"
-                                         + line.substring(110);
-                        } else {
-                            recordLine = recordLine + line.substring(48);
-                        }
-                        if (isDebitSummary) {
-                            recordLine = "<span class='bg-warning'>" + recordLine + "</span>";
-                        }
-                        formattedContent = formattedContent + recordLine + "<br />";
-                    } else {
-                        formattedContent = formattedContent + line + "<br />";
-                    }
-                }
-                $("#formattedContents").html(formattedContent);
-            };
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
-			$(document).ready(function() {
-                $(".well .btn").click(function() {
-                    $(this).toggleClass("active");
-                    formatText();
-                });
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 
-                $("#selectDeleteAll .btn-danger").click(function() {
-                    $(".well .btn").each( function() {
-                        var button = $(this);
-                        if(button.hasClass("active")) {
-                            button.removeClass("active");
-                        }
-                    });
-                     formatText();
-                });
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
 
-                $("#selectDeleteAll .btn-success").click(function() {
-                    $(".well .btn").each( function() {
-                     var button = $(this);
-                        if(!button.hasClass("active")) {
-                            button.addClass("active");
-                        }
-                    });
-                     formatText();
-                });
-			});
-		</script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="common.js"></script>
+    <script src="emafFormatter.js"></script>
+    <script src="baiFormatter.js"></script>
 </head>
 <body>
 <div class="container">
     <h2 class="row">File Viewer</h2>
     <div class="row">
-        <ul class="nav nav-tabs">
-            <li role="presentation" class="active"><a href="#">eMAF</a></li>
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#emaf" aria-controls="emaf" role="tab" data-toggle="tab">eMAF</a></li>
+            <li role="presentation"><a href="#bai" aria-controls="bai" role="tab" data-toggle="tab">BAI</a></li>
         </ul>
-    </div>
-    <br />
-    <div class="row">
-			<textarea id="fileContents" rows="4" cols="50"
-                      placeholder="Enter file contents here." class="container form-control" onkeyup="formatText()"></textarea>
-    </div>
-    <div class="row">
-        <div class="well">
-            <div>
-                <button type="button" id="fileHeader" class="btn btn-default"> File Header</button>
-                <button type="button" id="fileTrailer" class="btn btn-default"> File Trailer</button>
-                <button type="button" id="creditSummary" class="btn btn-default"> Credit Summary</button>
-                <button type="button" id="debitSummary" class="btn btn-default"> Debit Summary</button>
-            </div>
-            <br />
-            <div>
-                <button type="button" id="recordCode" class="btn btn-default">Record Code</button>
-                <button type="button" id="processingDate" class="btn btn-default">Processing Date</button>
-                <button type="button" id="chainCode" class="btn btn-default"> Chain Code</button>
-                <button type="button" id="amount" class="btn btn-default"> Amount</button>
-                <button type="button" id="fundingSubmerhantId" class="btn btn-default"> Funding Submerchant ID</button>
-                <button type="button" id="recordLevel" class="btn btn-default"> Record Level </button>
-                <button type="button" id="mop" class="btn btn-default">Method of Payment</button>
-            </div>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="emaf">
+                <div class="row">
+                        <textarea id="emaf_fileContents" rows="4" cols="50"
+                                  placeholder="Enter eMAF file contents here." class="container form-control" onkeyup="emaf_formatText()"></textarea>
+                </div>
+                <div class="row">
+                    <div class="well">
+                        <div>
+                            <button type="button" id="emaf_fileHeader" class="btn btn-default"> File Header</button>
+                            <button type="button" id="emaf_fileTrailer" class="btn btn-default"> File Trailer</button>
+                            <button type="button" id="emaf_creditSummary" class="btn btn-default"> Credit Summary</button>
+                            <button type="button" id="emaf_debitSummary" class="btn btn-default"> Debit Summary</button>
+                        </div>
+                        <br />
+                        <div>
+                            <button type="button" id="emaf_recordCode" class="btn btn-default">Record Code</button>
+                            <button type="button" id="emaf_processingDate" class="btn btn-default">Processing Date</button>
+                            <button type="button" id="emaf_chainCode" class="btn btn-default"> Chain Code</button>
+                            <button type="button" id="emaf_amount" class="btn btn-default"> Amount</button>
+                            <button type="button" id="emaf_fundingSubmerhantId" class="btn btn-default"> Funding Submerchant ID</button>
+                            <button type="button" id="emaf_recordLevel" class="btn btn-default"> Record Level </button>
+                            <button type="button" id="emaf_mop" class="btn btn-default">Method of Payment</button>
+                        </div>
 
+                    </div>
+                    <div id="emaf_selectDeleteAll">
+                        <button type="button" id="emaf_selectAllBtn" class="btn btn-success">Select All</button>
+                        <button type="button" id="emaf_clearAllBtn" class="btn btn-danger">Clear All</button>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <pre id="emaf_formattedContents"></pre>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="bai">
+                <div class="row">
+                        <textarea id="bai_fileContents" rows="4" cols="50"
+                                  placeholder="Enter BAI file contents here." class="container form-control" onkeyup="bai_formatText()"></textarea>
+                </div>
+                <div class="row">
+                    <div class="well">
+                        <div>
+                            <button type="button" id="bai_fileHeader" class="btn btn-default"> File Header</button>
+                            <button type="button" id="bai_fileTrailer" class="btn btn-default"> File Trailer</button>
+                            <button type="button" id="bai_groupHeader" class="btn btn-default"> Group Header</button>
+                            <button type="button" id="bai_groupTrailer" class="btn btn-default"> Group Trailer</button>
+                            <button type="button" id="bai_accountHeader" class="btn btn-default"> Account Header</button>
+                            <button type="button" id="bai_accountTrailer" class="btn btn-default"> Account Trailer</button>
+                            <button type="button" id="bai_transactionDetail" class="btn btn-default"> Transaction Detail</button>
+                        </div>
+                        <br />
+                        <div>
+                            <button type="button" id="bai_accountNumber" class="btn btn-default">Account Number</button>
+                            <button type="button" id="bai_accountBalance" class="btn btn-default">Account Balance</button>
+                            <button type="button" id="bai_bankSettlementDay" class="btn btn-default"> Bank Settlement Day</button>
+                            <button type="button" id="bai_bankRefNum" class="btn btn-default"> Bank Reference Number</button>
+                            <button type="button" id="bai_amount" class="btn btn-default"> Amount </button>
+                            <button type="button" id="bai_typeCode" class="btn btn-default">Type Code</button>
+                            <button type="button" id="bai_detailRecord" class="btn btn-default">Detail Record</button>
+                        </div>
+
+                    </div>
+                    <div id="bai_selectDeleteAll">
+                        <button type="button" id="bai_selectAllBtn" class="btn btn-success">Select All</button>
+                        <button type="button" id="bai_clearAllBtn" class="btn btn-danger">Clear All</button>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <pre id="bai_formattedContents"></pre>
+                </div>
+            </div>
         </div>
-        <div id="selectDeleteAll">
-            <button type="button" id="selectAllBtn" class="btn btn-success">Select All</button>
-            <button type="button" id="clearAllBtn" class="btn btn-danger">Clear All</button>
-        </div>
-    </div>
-    <br />
-    <div class="row">
-        <pre id="formattedContents"></pre>
     </div>
 </div>
 </body>
