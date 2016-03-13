@@ -59,7 +59,7 @@ function bai_formatText() {
                     recordLine = recordLine + parts[index] + ",";
                 }
             } else {
-                recordLine = line;
+                recordLine += line;
             }
             if (isFileTrailer) {
                 recordLine = "<span class='bg-danger'>" + recordLine + "</span>";
@@ -69,28 +69,28 @@ function bai_formatText() {
             if (isFileHeader) {
                 recordLine = "<span class='bg-info'>" + recordLine + "</span>";
             } else {
-                recordLine = line;
+                recordLine += line;
             }
             formattedContent = formattedContent + recordLine + "<br />";
         } else if (record == accountTrailerCode) {
               if (isAccountTrailer) {
                   recordLine = "<span class='bg-warning'>" + recordLine + "</span>";
               } else {
-                  recordLine = line;
+                  recordLine += line;
                }
               formattedContent = formattedContent + recordLine + "<br />";
         } else if (record == groupTrailerCode) {
                if (isGroupTrailer) {
                    recordLine = "<span class='bg-warning'>" + recordLine + "</span>";
                }else {
-                   recordLine = line;
+                   recordLine += line;
                }
                formattedContent = formattedContent + recordLine + "<br />";
         } else if (record == fileTrailerCode) {
                if (isFileTrailer) {
                    recordLine = "<span class='bg-warning'>" + recordLine + "</span>";
                }else {
-                   recordLine = line;
+                   recordLine += line;
                }
                formattedContent = formattedContent + recordLine + "<br />";
         } else if (record == transactionDetailCode) {
