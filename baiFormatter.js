@@ -66,25 +66,25 @@ function bai_formatText() {
             }
             formattedContent += recordLine + "<br />";
         } else if (record == fileHeaderCode) {
-            recordLine += line;
+            recordLine = line;
             if (isFileHeader) {
                 recordLine = "<span class='bg-info'>" + recordLine + "</span>";
-            } 
+            }
             formattedContent += recordLine + "<br />";
         } else if (record == accountTrailerCode) {
-            recordLine += line;
+            recordLine = line;
             if (isAccountTrailer) {
                 recordLine = "<span class='bg-warning'>" + recordLine + "</span>";
-            } 
+            }
             formattedContent += recordLine + "<br />";
         } else if (record == groupTrailerCode) {
-           recordLine += line;
+           recordLine = line;
            if (isGroupTrailer) {
                recordLine = "<span class='bg-warning'>" + recordLine + "</span>";
            }
            formattedContent += recordLine + "<br />";
         } else if (record == fileTrailerCode) {
-            recordLine += line;
+            recordLine = line;
            if (isFileTrailer) {
                recordLine = "<span class='bg-warning'>" + recordLine + "</span>";
            }
