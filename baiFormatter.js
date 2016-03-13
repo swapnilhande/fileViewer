@@ -61,7 +61,7 @@ function bai_formatText() {
             } else {
                 recordLine += line;
             }
-            if (isFileTrailer) {
+            if (isGroupHeader) {
                 recordLine = "<span class='bg-danger'>" + recordLine + "</span>";
             }
             formattedContent += recordLine + "<br />";
