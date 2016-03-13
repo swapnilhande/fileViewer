@@ -112,7 +112,7 @@ function bai_formatText() {
           for	(index = 5; index < parts.length; index++) {
               recordLine += parts[index] + ",";
           }
-          if (isFileTrailer) {
+          if (isTransactionDetail) {
               recordLine = "<span class='bg-danger'>" + recordLine + "</span>";
           }
           formattedContent += recordLine + "<br />";
