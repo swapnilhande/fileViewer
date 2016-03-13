@@ -29,34 +29,34 @@ function bai_formatText() {
         var record = line.substring(0, 2);
         if (record == accountHeaderCode) {
             var parts = line.split(",");
-            recordLine = recordLine + parts[0] + ",";
+            recordLine += parts[0] + ",";
             if (isAccountNumber) {
-                recordLine = recordLine	+ "<span class='label label-default'>" + parts[1]+ "</span>" + ",";
+                recordLine += "<span class='label label-default'>" + parts[1]+ "</span>" + ",";
             } else {
-                recordLine = recordLine + parts[1] + ",";
+                recordLine += parts[1] + ",";
             }
             recordLine = recordLine + parts[2] + "," + parts[3] + ",";
             if (isAccountBalance) {
-                recordLine = recordLine + "<span class='label label-primary'>" + parts[4] + "</span>" + ",";
+                recordLine += "<span class='label label-primary'>" + parts[4] + "</span>" + ",";
             } else {
-                recordLine = recordLine + parts[4] + ",";
+                recordLine += parts[4] + ",";
             }
             var index;
             for	(index = 5; index < parts.length; index++) {
-                recordLine = recordLine + parts[index] + ",";
+                recordLine += parts[index] + ",";
             }
             if (isAccountHeader) {
                 recordLine = "<span class='bg-success'>" + recordLine + "</span>";
             }
-            formattedContent = formattedContent + recordLine + "<br />";
+            formattedContent += recordLine + "<br />";
         } else if (record == groupHeaderCode) {
             if (isBankSettlementDay) {
                 var parts = line.split(",");
-                recordLine = recordLine + parts[0] + ","+ parts[1] + ","+ parts[2] + ","+ parts[3] + ",";
-                recordLine = recordLine + "<span class='label label-default'>" + parts[4] + "</span>" + ",";
+                recordLine += parts[0] + ","+ parts[1] + ","+ parts[2] + ","+ parts[3] + ",";
+                recordLine += "<span class='label label-default'>" + parts[4] + "</span>" + ",";
                 var index;
                 for	(index = 5; index < parts.length; index++) {
-                    recordLine = recordLine + parts[index] + ",";
+                    recordLine += parts[index] + ",";
                 }
             } else {
                 recordLine += line;
@@ -64,64 +64,60 @@ function bai_formatText() {
             if (isFileTrailer) {
                 recordLine = "<span class='bg-danger'>" + recordLine + "</span>";
             }
-            formattedContent = formattedContent + recordLine + "<br />";
+            formattedContent += recordLine + "<br />";
         } else if (record == fileHeaderCode) {
+            recordLine += line;
             if (isFileHeader) {
                 recordLine = "<span class='bg-info'>" + recordLine + "</span>";
-            } else {
-                recordLine += line;
-            }
-            formattedContent = formattedContent + recordLine + "<br />";
+            } 
+            formattedContent += recordLine + "<br />";
         } else if (record == accountTrailerCode) {
-              if (isAccountTrailer) {
-                  recordLine = "<span class='bg-warning'>" + recordLine + "</span>";
-              } else {
-                  recordLine += line;
-               }
-              formattedContent = formattedContent + recordLine + "<br />";
+            recordLine += line;
+            if (isAccountTrailer) {
+                recordLine = "<span class='bg-warning'>" + recordLine + "</span>";
+            } 
+            formattedContent += recordLine + "<br />";
         } else if (record == groupTrailerCode) {
-               if (isGroupTrailer) {
-                   recordLine = "<span class='bg-warning'>" + recordLine + "</span>";
-               }else {
-                   recordLine += line;
-               }
-               formattedContent = formattedContent + recordLine + "<br />";
+           recordLine += line;
+           if (isGroupTrailer) {
+               recordLine = "<span class='bg-warning'>" + recordLine + "</span>";
+           }
+           formattedContent += recordLine + "<br />";
         } else if (record == fileTrailerCode) {
-               if (isFileTrailer) {
-                   recordLine = "<span class='bg-warning'>" + recordLine + "</span>";
-               }else {
-                   recordLine += line;
-               }
-               formattedContent = formattedContent + recordLine + "<br />";
+            recordLine += line;
+           if (isFileTrailer) {
+               recordLine = "<span class='bg-warning'>" + recordLine + "</span>";
+           }
+           formattedContent += recordLine + "<br />";
         } else if (record == transactionDetailCode) {
-              var parts = line.split(",");
-              recordLine = recordLine + parts[0] + ",";
-              if (isTypeCode) {
-                  recordLine = recordLine + "<span class='label label-default'>" + parts[1] + "</span>" + ",";
-              } else {
-                  recordLine = recordLine + parts[1] + ",";;
-              }
-              if (isAmount) {
-                  recordLine = recordLine + "<span class='label label-default'>" + parts[2] + "</span>" + ",";
-              } else {
-                  recordLine = recordLine + parts[2] + ",";;
-              }
-              recordLine = recordLine + parts[3] + ",";
-              if (isBankRefNum) {
-                  recordLine = recordLine + "<span class='label label-default'>" + parts[4] + "</span>" + ",";
-              } else {
-                  recordLine = recordLine + parts[4] + ",";;
-              }
-              var index;
-              for	(index = 5; index < parts.length; index++) {
-                  recordLine = recordLine + parts[index] + ",";
-              }
-              if (isFileTrailer) {
-                  recordLine = "<span class='bg-danger'>" + recordLine + "</span>";
-              }
-              formattedContent = formattedContent + recordLine + "<br />";
+          var parts = line.split(",");
+          recordLine = recordLine + parts[0] + ",";
+          if (isTypeCode) {
+              recordLine += "<span class='label label-default'>" + parts[1] + "</span>" + ",";
+          } else {
+              recordLine += parts[1] + ",";;
+          }
+          if (isAmount) {
+              recordLine += "<span class='label label-default'>" + parts[2] + "</span>" + ",";
+          } else {
+              recordLine += parts[2] + ",";;
+          }
+          recordLine += parts[3] + ",";
+          if (isBankRefNum) {
+              recordLine += "<span class='label label-default'>" + parts[4] + "</span>" + ",";
+          } else {
+              recordLine += parts[4] + ",";;
+          }
+          var index;
+          for	(index = 5; index < parts.length; index++) {
+              recordLine += parts[index] + ",";
+          }
+          if (isFileTrailer) {
+              recordLine = "<span class='bg-danger'>" + recordLine + "</span>";
+          }
+          formattedContent += recordLine + "<br />";
         } else {
-            formattedContent = formattedContent + line + "<br />";
+            formattedContent += line + "<br />";
         }
     }
     $("#bai_formattedContents").html(formattedContent);
