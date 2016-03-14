@@ -22,12 +22,15 @@ function bai_formatText() {
     var groupTrailerCode = "98";
     var fileTrailerCode = "99";
     var transactionDetailCode = "16";
+    var addendaCode = "88";
     var formattedContent = "";
+    var previousCode = "";
     for (var index in lines) {
         var line = lines[index];
         var recordLine = "";
         var record = line.substring(0, 2);
         if (record == accountHeaderCode) {
+            previousCode = accountHeaderCode;
             var parts = line.split(",");
             recordLine += parts[0] + ",";
             if (isAccountNumber) {
@@ -50,6 +53,7 @@ function bai_formatText() {
             }
             formattedContent += recordLine + "<br />";
         } else if (record == groupHeaderCode) {
+            previousCode = groupHeaderCode;
             if (isBankSettlementDay) {
                 var parts = line.split(",");
                 recordLine += parts[0] + ","+ parts[1] + ","+ parts[2] + ","+ parts[3] + ",";
@@ -66,30 +70,35 @@ function bai_formatText() {
             }
             formattedContent += recordLine + "<br />";
         } else if (record == fileHeaderCode) {
+            previousCode = fileHeaderCode;
             recordLine = line;
             if (isFileHeader) {
                 recordLine = "<span class='bg-info'>" + recordLine + "</span>";
             }
             formattedContent += recordLine + "<br />";
         } else if (record == accountTrailerCode) {
+            previousCode = accountTrailerCode;
             recordLine = line;
             if (isAccountTrailer) {
                 recordLine = "<span class='bg-warning'>" + recordLine + "</span>";
             }
             formattedContent += recordLine + "<br />";
         } else if (record == groupTrailerCode) {
+            previousCode = groupTrailerCode;
            recordLine = line;
            if (isGroupTrailer) {
                recordLine = "<span class='bg-warning'>" + recordLine + "</span>";
            }
            formattedContent += recordLine + "<br />";
         } else if (record == fileTrailerCode) {
+            previousCode = fileTrailerCode;
             recordLine = line;
            if (isFileTrailer) {
                recordLine = "<span class='bg-warning'>" + recordLine + "</span>";
            }
            formattedContent += recordLine + "<br />";
         } else if (record == transactionDetailCode) {
+          previousCode = transactionDetailCode;
           var parts = line.split(",");
           recordLine = recordLine + parts[0] + ",";
           if (isTypeCode) {
@@ -109,8 +118,33 @@ function bai_formatText() {
               recordLine += parts[4] + ",";;
           }
           var index;
-          for	(index = 5; index < parts.length; index++) {
+          for	(index = 5; index < parts.length - 1; index++) {
               recordLine += parts[index] + ",";
+          }
+          if(isDetailRecord) {
+            recordLine += "<span class='label label-default'>" + parts[parts.length - 1] + "</span>" + ",";
+          } else {
+            recordLine += parts[parts.length - 1] + ",";
+          }
+          if (isTransactionDetail) {
+              recordLine = "<span class='bg-danger'>" + recordLine + "</span>";
+          }
+          formattedContent += recordLine + "<br />";
+        } else if (record == addendaCode && previousCode == transactionDetailCode) {
+            var parts = line.split(",");
+            recordLine = recordLine + parts[0] + ",";
+            if(isDetailRecord) {
+            recordLine += "<span class='label label-default'>";
+            var index;
+              for	(index = 1; index < parts.length; index++) {
+                  recordLine += parts[index] + ",";
+              }
+            recordLine +=  "</span>" + ",";
+          } else {
+            var index;
+              for	(index = 1; index < parts.length; index++) {
+                  recordLine += parts[index] + ",";
+              }
           }
           if (isTransactionDetail) {
               recordLine = "<span class='bg-danger'>" + recordLine + "</span>";
